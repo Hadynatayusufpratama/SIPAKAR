@@ -49,4 +49,9 @@ Route::middleware(['auth'])->group(function () {
 
     // Route untuk mencetak dan mengunduh Surat Izin SIMAKSI dalam bentuk PDF
     Route::get('/permohonan/cetak-pdf/{id}', [SimaksiController::class, 'cetakPdf'])->name('permohonan.cetakPdf');
+
+    Route::get('/admin/simaksi/export', [SimaksiController::class, 'exportData'])->name('admin.export.data');
+    Route::post('/simaksi/store-umum', [SimaksiController::class, 'storeUmum'])->name('simaksi.storeUmum');
+// Atau jika menggunakan satu controller yang sama dengan membedakan kategori:
+Route::post('/simaksi/store', [SimaksiController::class, 'store'])->name('simaksi.store');
 });

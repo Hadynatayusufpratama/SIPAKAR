@@ -3,626 +3,511 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Admin SIPAKAR - BKSDA Sulawesi Tengah</title>
+    <title>Dashboard Admin SIPAKAR - BKSDA Sulteng</title>
+    <!-- FontAwesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#064e3b',
+                        'primary-dark': '#022c22',
+                        'primary-light': '#ecfdf5',
+                        accent: '#d97706',
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --primary: #064e3b;          /* Hijau Tua Utama (Deep Emerald) */
-            --primary-dark: #022c22;     /* Hijau Sangat Gelap */
-            --primary-light: #f0fdf4;    /* Hijau Muda Lembut */
-            --accent: #d97706;           /* Aksen Emas/Kuning */
-            --text-main: #0f172a;        /* Teks Utama */
-            --text-muted: #475569;       /* Teks Sekunder */
-            --border-color: #cbd5e1;     /* Garis Pembatas */
-            --bg-body: #f8fafc;          /* Background Modern */
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background-color: var(--bg-body); color: var(--text-main); padding-bottom: 50px; -webkit-font-smoothing: antialiased; }
-        
-        /* Navbar Profesional Tunggal */
-        .navbar {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            padding: 18px 32px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 20px rgba(2, 44, 34, 0.15);
-            border-bottom: 4px solid var(--accent);
-        }
-        .navbar-brand {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .navbar-brand img {
-            height: 40px;
-            width: auto;
-            object-fit: contain;
-            background: white;
-            padding: 4px 8px;
-            border-radius: 6px;
-        }
-        .navbar h2 { font-size: 17px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; color: white; }
-        
-        .navbar-right {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .badge-admin-active {
-            background-color: rgba(16, 185, 129, 0.2);
-            color: #34d399;
-            border: 1px solid rgba(52, 211, 153, 0.4);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .btn-logout {
-            background-color: #ef4444;
-            color: white;
-            padding: 6px 14px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 12px;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: background 0.2s;
-        }
-        .btn-logout:hover { background-color: #dc2626; }
-
-        .container {
-            max-width: 1280px;
-            margin: 35px auto;
-            padding: 0 24px;
-        }
-
-        /* Stats Cards Modern */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        .stat-card {
-            background: white;
-            padding: 22px 24px;
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.03);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .stat-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px -10px rgba(6, 78, 59, 0.1);
-        }
-        .stat-card .info h3 { font-size: 26px; font-weight: 800; color: var(--text-main); margin-top: 4px; }
-        .stat-card .info p { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-muted); }
-        .stat-icon { 
-            width: 52px; 
-            height: 52px; 
-            border-radius: 14px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-size: 20px; 
-            background: var(--primary-light);
-            color: var(--primary);
-        }
-
-        /* Navigation Filter Tabs Modern */
-        .filter-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 24px;
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 12px;
-            overflow-x: auto;
-        }
-        .tab-btn {
-            padding: 10px 18px;
-            border-radius: 10px;
-            font-size: 13px;
-            font-weight: 600;
-            text-decoration: none;
-            color: var(--text-muted);
-            background: white;
-            border: 1px solid var(--border-color);
-            transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            white-space: nowrap;
-        }
-        .tab-btn:hover { background: #f1f5f9; color: var(--text-main); border-color: #94a3b8; }
-        .tab-btn.active { 
-            background: var(--primary); 
-            color: white; 
-            border-color: var(--primary); 
-            box-shadow: 0 4px 12px rgba(6, 78, 59, 0.2);
-        }
-
-        /* Card Container Utama */
-        .card {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
-            overflow: hidden;
-            border: 1px solid #e2e8f0;
-        }
-        .card-header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            padding: 20px 24px;
-            font-size: 16px;
-            font-weight: 700;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .table-responsive { overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; }
-        th { background-color: #f8fafc; padding: 14px 18px; font-weight: 700; color: #334155; border-bottom: 2px solid #e2e8f0; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; }
-        td { padding: 16px 18px; border-bottom: 1px solid #f1f5f9; vertical-align: middle; color: var(--text-main); }
-        tr:hover { background-color: #f8fafc; }
-
-        /* Badges Modern */
-        .badge-status {
-            padding: 6px 10px;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 11px;
-            display: inline-block;
-            text-transform: capitalize;
-            letter-spacing: 0.3px;
-        }
-        .badge-pending { background-color: #fef3c7; color: #b45309; }
-        .badge-menunggu_zoom { background-color: #e0f2fe; color: #0369a1; }
-        .badge-disetujui { background-color: #d1fae5; color: #047857; }
-        .badge-ditolak { background-color: #fee2e2; color: #b91c1c; }
-
-        .badge-location {
-            background-color: #f1f5f9;
-            color: #334155;
-            padding: 6px 10px;
-            border-radius: 6px;
-            font-weight: 600;
-            display: inline-block;
-            border: 1px solid #cbd5e1;
-        }
-
-        .btn-file {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 10px;
-            background-color: #0284c7;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 600;
-            margin-bottom: 4px;
-            transition: background 0.2s;
-        }
-        .btn-file:hover { background-color: #0369a1; }
-        
-        .empty-state { text-align: center; padding: 50px; color: var(--text-muted); font-weight: 500; }
-
-        /* Action Buttons */
-        .action-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            align-items: center;
-        }
-        .btn-action {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            padding: 7px 12px;
-            font-size: 11px;
-            font-weight: 700;
-            color: white;
-            border-radius: 8px;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        .btn-action:hover { transform: translateY(-1px); opacity: 0.9; }
-        .btn-detail { background-color: #2563eb; }
-        .btn-zoom { background-color: #0891b2; }
-        .btn-approve { background-color: #059669; }
-        .btn-reject { background-color: #d97706; }
-        .btn-delete { background-color: #dc2626; }
-
-        .alert-success {
-            background-color: #d1fae5;
-            border: 1px solid #34d399;
-            color: #065f46;
-            padding: 14px 18px;
-            border-radius: 12px;
-            margin-bottom: 24px;
-            font-size: 13px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* Modal Box Modern */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(2, 44, 34, 0.5);
-            backdrop-filter: blur(4px);
-            z-index: 999;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        .modal.active { display: flex; }
-        .modal-content {
-            background: white;
-            width: 100%;
-            max-width: 700px;
-            max-height: 90vh;
-            border-radius: 20px;
-            overflow-y: auto;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            border: 1px solid #e2e8f0;
-        }
-        .modal-header {
-            padding: 20px 24px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 700;
-        }
-        .modal-body { padding: 24px; font-size: 13px; line-height: 1.6; }
-        .detail-group { margin-bottom: 16px; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px; }
-        .detail-group label { font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 4px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .detail-group p { font-weight: 600; color: var(--text-main); }
-        .form-control-sm { width: 100%; padding: 8px 12px; font-size: 12px; border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 8px; background: #f8fafc; outline: none; }
-        .form-control-sm:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 3px rgba(6, 78, 59, 0.1); }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
     </style>
 </head>
-<body>
+<body class="bg-slate-50/70 text-slate-800 antialiased min-h-screen flex flex-col">
 
-    
+    <!-- Layout Wrapper (Sidebar + Main Content) -->
+    <div class="flex-1 flex flex-col lg:flex-row min-h-screen">
 
-    <div class="container">
-        @if(session('success'))
-            <div class="alert-success">
-                <i class="fa-solid fa-circle-check" style="font-size: 16px;"></i> {{ session('success') }}
+        <!-- Mobile Header Bar -->
+        <div class="lg:hidden bg-gradient-to-r from-emerald-950 via-teal-900 to-emerald-900 text-white p-4 flex justify-between items-center border-b-2 border-amber-500 sticky top-0 z-50 shadow-md">
+            <div class="flex items-center gap-3">
+                <img src="{{ asset('images/logo_bksda.png') }}" alt="Logo BKSDA Sulteng" class="h-9 w-auto object-contain bg-white px-2 py-1 rounded shadow-sm">
+                <h2 class="text-xs font-extrabold tracking-wider uppercase">SIPAKAR ADMIN</h2>
             </div>
-        @endif
-
-        <!-- Lanjutkan sisa konten statistik, tab, dan tabel Anda di sini -->
-    </div>
-
-</body>
-</html>
-
-
-
-    <div class="container">
-        <!-- Letakkan session alert sukses di sini -->
-        @if(session('success'))
-            <div class="alert-success">
-                <i class="fa-solid fa-circle-check" style="font-size: 16px;"></i> {{ session('success') }}
-            </div>
-        @endif
-
-        <!-- Stats Cards & Konten Tabel Admin Anda -->
-        <!-- Pastikan struktur card, filter-tabs, tabel, dan modal Anda dibungkus dengan kelas di atas -->
-    </div>
-
-</body>
-</html>
-
-    <!-- Navbar Admin -->
-    <div class="navbar">
-        <div style="display: flex; align-items: center; gap: 15px;">
-            <img src="{{ asset('images/logo_bksda.png') }}" alt="Logo BKSDA Sulteng" style="height: 45px; background: white; padding: 4px 8px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-            <h2>DASHBOARD ADMIN SIPAKAR - BKSDA SULTENG</h2>
-        </div>
-        <div style="display: flex; align-items: center; gap: 15px;">
-            <span style="font-size: 13px; background: #047857; padding: 5px 12px; border-radius: 20px;">
-                <i class="fa-solid fa-circle" style="color: #4ade80; font-size: 10px;"></i> Admin Active
-            </span>
-            <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
-                @csrf
-                <button type="submit" style="background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;">
-                    <i class="fa-solid fa-right-from-bracket"></i> Logout
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Main Content -->
-    <div class="container">
-
-        <!-- Alert Notifikasi -->
-        @if(session('success'))
-            <div class="alert-success">
-                <i class="fa-solid fa-circle-check"></i> {{ session('success') }}
-            </div>
-        @endif
-
-        <!-- Grid Statistik Permohonan -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="info">
-                    <p style="color: #3b82f6;">Semua Masuk</p>
-                    <h3>{{ $countSemua }}</h3>
-                </div>
-                <div class="stat-icon" style="background: #eff6ff; color: #3b82f6;"><i class="fa-solid fa-folder-open"></i></div>
-            </div>
-            <div class="stat-card">
-                <div class="info">
-                    <p style="color: #d97706;">Menunggu Persetujuan</p>
-                    <h3>{{ $countPending }}</h3>
-                </div>
-                <div class="stat-icon" style="background: #fffbeb; color: #d97706;"><i class="fa-solid fa-clock"></i></div>
-            </div>
-            <div class="stat-card">
-                <div class="info">
-                    <p style="color: #059669;">Disetujui</p>
-                    <h3>{{ $countDisetujui }}</h3>
-                </div>
-                <div class="stat-icon" style="background: #ecfdf5; color: #059669;"><i class="fa-solid fa-circle-check"></i></div>
-            </div>
-            <div class="stat-card">
-                <div class="info">
-                    <p style="color: #dc2626;">Ditolak</p>
-                    <h3>{{ $countDitolak }}</h3>
-                </div>
-                <div class="stat-icon" style="background: #fef2f2; color: #dc2626;"><i class="fa-solid fa-circle-xmark"></i></div>
-            </div>
+            <button onclick="toggleSidebar()" class="text-white text-xl focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
         </div>
 
-        <!-- Filter Navigation Tabs -->
-        <div class="filter-tabs">
-            <a href="{{ route('simaksi.admin', ['status' => 'semua']) }}" class="tab-btn {{ $status == 'semua' ? 'active' : '' }}">
-                <i class="fa-solid fa-list"></i> Semua Permohonan ({{ $countSemua }})
-            </a>
-            <a href="{{ route('simaksi.admin', ['status' => 'pending']) }}" class="tab-btn {{ $status == 'pending' ? 'active' : '' }}">
-                <i class="fa-solid fa-hourglass-half"></i> Permohonan Masuk ({{ $countPending }})
-            </a>
-            <a href="{{ route('simaksi.admin', ['status' => 'disetujui']) }}" class="tab-btn {{ $status == 'disetujui' ? 'active' : '' }}">
-                <i class="fa-solid fa-check-circle"></i> Disetujui ({{ $countDisetujui }})
-            </a>
-            <a href="{{ route('simaksi.admin', ['status' => 'ditolak']) }}" class="tab-btn {{ $status == 'ditolak' ? 'active' : '' }}">
-                <i class="fa-solid fa-times-circle"></i> Ditolak ({{ $countDitolak }})
-            </a>
-        </div>
+        <!-- SIDEBAR / NAVBAR PROFESIONAL KIRI -->
+        <aside class="w-full lg:w-72 bg-gradient-to-b from-emerald-950 via-teal-950 to-emerald-900 text-white flex flex-col justify-between shadow-2xl shrink-0 border-r border-emerald-800/40">
+            <div>
+                <!-- Brand Header (Logo di Atas, Teks di Bawah Secara Center) -->
+                <div class="p-6 border-b border-emerald-800/60 bg-emerald-950/50 flex flex-col items-center text-center">
+                    <div class="bg-white p-3 rounded-2xl shadow-xl border border-amber-500/30 mb-3 transform hover:scale-105 transition-transform duration-300">
+                        <img src="{{ asset('images/logo_bksda.png') }}" alt="Logo BKSDA" class="h-16 w-auto object-contain">
+                    </div>
+                    <div>
+                        <h2 class="font-black text-sm tracking-wide text-white leading-tight">BKSDA SULAWESI TENGAH</h2>
+                        <span class="text-[11px] text-amber-400 font-bold uppercase tracking-widest mt-1 inline-block">SIPAKAR Online System</span>
+                    </div>
+                </div>
 
-        <div class="card">
-            <div class="card-header">
-                <span><i class="fa-solid fa-list-check"></i> Daftar Permohonan SIPAKAR</span>
-                <span style="font-size: 13px;">Total Tampil: {{ $pendaftarans->count() }} Data</span>
+                <!-- Admin Active Badge & Navigation Info -->
+                <div class="p-4 flex-1 overflow-y-auto space-y-6">
+                    <div class="bg-emerald-900/30 border border-amber-500/30 rounded-xl p-3 text-center shadow-inner">
+                        <span class="inline-flex items-center gap-2 bg-amber-500/20 text-amber-300 border border-amber-500/40 px-3 py-1 rounded-full text-xs font-bold shadow-sm mb-1">
+                            <i class="fa-solid fa-circle text-[85%] animate-pulse"></i> Admin Active
+                        </span>
+                        <p class="text-[10px] text-slate-300 font-medium">Sistem Pengendalian Kawasan Konservasi</p>
+                    </div>
+
+                    <!-- Navigasi Utama & Tab Status di Sidebar Kiri -->
+                    <div class="space-y-1.5">
+                        <p class="text-[10px] font-bold text-amber-400 uppercase tracking-widest px-3 mb-2 flex items-center gap-1.5"><i class="fa-solid fa-filter"></i> Filter Status Permohonan</p>
+                        
+                        <a href="{{ route('simaksi.admin', ['status' => 'semua', 'kategori' => request('kategori', 'semua')]) }}" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all {{ ($status ?? 'semua') == 'semua' ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-emerald-950 font-bold shadow-lg shadow-amber-500/20' : 'text-slate-200 hover:bg-emerald-900/50' }}">
+                            <span class="flex items-center gap-2.5"><i class="fa-solid fa-list w-4"></i> Semua Permohonan</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full {{ ($status ?? 'semua') == 'semua' ? 'bg-emerald-950 text-amber-300 font-bold' : 'bg-emerald-900/60 text-slate-300' }}">{{ $countSemua ?? 0 }}</span>
+                        </a>
+
+                        <a href="{{ route('simaksi.admin', ['status' => 'pending', 'kategori' => request('kategori', 'semua')]) }}" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all {{ ($status ?? '') == 'pending' ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-emerald-950 font-bold shadow-lg shadow-amber-500/20' : 'text-slate-200 hover:bg-emerald-900/50' }}">
+                            <span class="flex items-center gap-2.5"><i class="fa-solid fa-hourglass-half w-4"></i> Permohonan Masuk</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full {{ ($status ?? '') == 'pending' ? 'bg-emerald-950 text-amber-300 font-bold' : 'bg-emerald-900/60 text-slate-300' }}">{{ $countPending ?? 0 }}</span>
+                        </a>
+
+                        <a href="{{ route('simaksi.admin', ['status' => 'disetujui', 'kategori' => request('kategori', 'semua')]) }}" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all {{ ($status ?? '') == 'disetujui' ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-emerald-950 font-bold shadow-lg shadow-amber-500/20' : 'text-slate-200 hover:bg-emerald-900/50' }}">
+                            <span class="flex items-center gap-2.5"><i class="fa-solid fa-check-circle w-4"></i> Disetujui</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full {{ ($status ?? '') == 'disetujui' ? 'bg-emerald-950 text-amber-300 font-bold' : 'bg-emerald-900/60 text-slate-300' }}">{{ $countDisetujui ?? 0 }}</span>
+                        </a>
+
+                        <a href="{{ route('simaksi.admin', ['status' => 'ditolak', 'kategori' => request('kategori', 'semua')]) }}" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all {{ ($status ?? '') == 'ditolak' ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-emerald-950 font-bold shadow-lg shadow-amber-500/20' : 'text-slate-200 hover:bg-emerald-900/50' }}">
+                            <span class="flex items-center gap-2.5"><i class="fa-solid fa-times-circle w-4"></i> Ditolak</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full {{ ($status ?? '') == 'ditolak' ? 'bg-emerald-950 text-amber-300 font-bold' : 'bg-emerald-900/60 text-slate-300' }}">{{ $countDitolak ?? 0 }}</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Logout Section at Bottom of Sidebar -->
+                <div class="p-4 border-t border-emerald-900/60 bg-emerald-950/90">
+                    <form action="{{ route('logout') }}" method="POST" class="m-0">
+                        @csrf
+                        <button type="submit" class="w-full bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-700 hover:to-red-700 text-white py-2.5 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-lg shadow-rose-600/20 transition-all">
+                            <i class="fa-solid fa-right-from-bracket"></i> Logout Sistem
+                        </button>
+                    </form>
+                </div>
             </div>
+        </aside>
 
-            <div class="table-responsive">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Tanggal Daftar</th>
-                            <th>Nama & Instansi</th>
-                            <th>Kontak</th>
-                            <th>Judul Kegiatan</th>
-                            <th>Lokasi Kawasan</th>
-                            <th>Status</th>
-                            <th>Berkas</th>
-                            <th style="text-align: center;">Aksi & Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($pendaftarans as $index => $item)
-                            <tr>
-                                <td><b>{{ $index + 1 }}</b></td>
-                                <td>{{ $item->created_at->format('d-m-Y H:i') }}</td>
-                                <td>
-                                    <b>{{ $item->nama_lengkap }}</b><br>
-                                    <small style="color: #64748b;">NIK: {{ $item->nik_nip }}</small><br>
-                                    <small style="color: #059669;">{{ $item->asal_instansi }}</small>
-                                </td>
-                                <td>
-                                    <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $item->no_hp) }}" target="_blank" style="color: #25d366; text-decoration: none; font-weight: 600;">
-                                        <i class="fa-brands fa-whatsapp"></i> {{ $item->no_hp }}
-                                    </a>
-                                </td>
-                                <td style="max-width: 200px;">
-                                    <b>{{ $item->judul_penelitian }}</b>
-                                </td>
-                                <td>
-                                    <span class="badge-location">{{ $item->lokasi_penelitian }}</span>
-                                </td>
-                                <td>
-                                    @if($item->status == 'disetujui')
-                                        <span class="badge-status badge-disetujui"><i class="fa-solid fa-circle-check"></i> Disetujui</span>
-                                    @elseif($item->status == 'menunggu_zoom')
-                                        <span class="badge-status badge-menunggu_zoom"><i class="fa-solid fa-video"></i> Menunggu Zoom</span>
-                                    @elseif($item->status == 'ditolak')
-                                        <span class="badge-status badge-ditolak"><i class="fa-solid fa-circle-xmark"></i> Ditolak</span>
-                                    @else
-                                        <span class="badge-status badge-pending"><i class="fa-solid fa-clock"></i> Menunggu</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    @if($item->file_ktp)
-                                        <a href="{{ asset('storage/' . $item->file_ktp) }}" target="_blank" class="btn-file"><i class="fa-solid fa-id-card"></i> KTP</a><br>
-                                    @endif
-                                    @if($item->file_surat_pengantar)
-                                        <a href="{{ asset('storage/' . $item->file_surat_pengantar) }}" target="_blank" class="btn-file"><i class="fa-solid fa-envelope"></i> Surat</a><br>
-                                    @endif
-                                    @if($item->file_proposal)
-                                        <a href="{{ asset('storage/' . $item->file_proposal) }}" target="_blank" class="btn-file" style="background-color: #e11d48;"><i class="fa-solid fa-file-pdf"></i> Proposal</a>
-                                    @endif
-                                </td>
-                                <td style="text-align: center; vertical-align: middle;">
-                                    <div style="display: flex; gap: 4px; justify-content: center; flex-wrap: wrap;">
-                                        
-                                        <!-- Tombol Lihat Detail Lengkap -->
-                                        <button type="button" class="btn-action btn-detail" onclick="openModal('modal-{{ $item->id }}')" title="Lihat Formulir Lengkap">
-                                            <i class="fa-solid fa-eye"></i> Detail
-                                        </button>
+        <!-- Overlay for mobile sidebar -->
+        <div id="sidebar-overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/50 z-30 hidden lg:hidden backdrop-blur-sm"></div>
 
-                                        <!-- 1. Form Jadwal Zoom (Jika status masih pending atau ingin jadwalkan zoom) -->
-                                        <form action="{{ route('admin.simaksi.updateStatus', $item->id) }}" method="POST" style="display:inline-block; border: 1px dashed #0284c7; padding: 5px; border-radius: 5px; background: #f0f9ff; margin-bottom: 4px; text-align: left; width: 100%;">
-                                            @csrf 
-                                            @method('PATCH')
-                                            <input type="hidden" name="status" value="menunggu_zoom">
-                                            <label style="font-size: 10px; font-weight: bold; color: #0284c7; display:block;">Jadwalkan Presentasi Zoom:</label>
-                                            <input type="datetime-local" name="tanggal_zoom" class="form-control-sm" value="{{ $item->tanggal_zoom ? \Carbon\Carbon::parse($item->tanggal_zoom)->format('Y-m-d\TH:i') : '' }}" required>
-                                            <input type="text" name="link_zoom" class="form-control-sm" placeholder="Link Zoom / Meeting" value="{{ $item->link_zoom }}" required>
-                                            <button type="submit" class="btn-action btn-zoom" style="width: 100%; font-size: 10px;" title="Kirim Jadwal Zoom ke Pemohon">
-                                                <i class="fa-solid fa-video"></i> Kirim Jadwal Zoom
-                                            </button>
-                                        </form>
+        <!-- Main Content Area -->
+        <div class="flex-1 flex flex-col min-w-0">
+            
+            <!-- Desktop Topbar Minimalis -->
+            <header class="hidden lg:flex bg-white border-b border-slate-200 px-8 py-4 justify-between items-center sticky top-0 z-20 shadow-sm">
+                <div class="flex items-center gap-3">
+                    <h1 class="text-sm font-extrabold text-emerald-950 tracking-wider uppercase flex items-center gap-2">
+                        <span class="w-2 h-5 bg-amber-500 rounded-full"></span> Dashboard Admin SIPAKAR
+                    </h1>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span class="inline-flex items-center gap-2 bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1.5 rounded-full text-xs font-bold">
+                        <i class="fa-solid fa-circle text-[8px] text-amber-500 animate-pulse"></i> Admin Active
+                    </span>
 
-                                        <!-- 2. Form Setuju (Dilengkapi Upload Surat Izin PDF & Catatan Admin) -->
-                                        @if($item->status != 'disetujui')
-                                            <form action="{{ route('admin.simaksi.updateStatus', $item->id) }}" method="POST" enctype="multipart/form-data" style="display:inline-block; border: 1px dashed #10b981; padding: 5px; border-radius: 5px; background: #ecfdf5; margin-bottom: 4px; text-align: left; width: 100%;">
-                                                @csrf 
-                                                @method('PATCH')
-                                                <input type="hidden" name="status" value="disetujui">
+                </div>
+            </header>
+
+            <!-- Container Konten Utama -->
+            <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1">
+
+                <!-- Alert Notifikasi -->
+                @if(session('success'))
+                    <div class="bg-emerald-50 border border-emerald-400 text-emerald-900 px-5 py-4 rounded-xl mb-7 text-xs font-semibold flex items-center gap-3 shadow-sm">
+                        <i class="fa-solid fa-circle-check text-base text-emerald-600"></i> {{ session('success') }}
+                    </div>
+                @endif
+
+                <!-- Grid Statistik Permohonan -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between relative overflow-hidden group hover:shadow-lg hover:border-emerald-600/30 transition-all">
+                        <div class="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-emerald-600 to-amber-500 opacity-0 group-hover:opacity-100 transition-all"></div>
+                        <div>
+                            <p class="text-[11px] font-bold uppercase tracking-wider text-emerald-800">Semua Masuk</p>
+                            <h3 class="text-2xl font-extrabold text-slate-900 mt-1">{{ $countSemua ?? 0 }}</h3>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-xl shadow-inner border border-emerald-100">
+                            <i class="fa-solid fa-folder-open"></i>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between relative overflow-hidden group hover:shadow-lg hover:border-amber-500/30 transition-all">
+                        <div class="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-emerald-600 to-amber-500 opacity-0 group-hover:opacity-100 transition-all"></div>
+                        <div>
+                            <p class="text-[11px] font-bold uppercase tracking-wider text-amber-600">Menunggu Persetujuan</p>
+                            <h3 class="text-2xl font-extrabold text-slate-900 mt-1">{{ $countPending ?? 0 }}</h3>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl shadow-inner border border-amber-100">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between relative overflow-hidden group hover:shadow-lg hover:border-emerald-600/30 transition-all">
+                        <div class="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-emerald-600 to-amber-500 opacity-0 group-hover:opacity-100 transition-all"></div>
+                        <div>
+                            <p class="text-[11px] font-bold uppercase tracking-wider text-emerald-600">Disetujui</p>
+                            <h3 class="text-2xl font-extrabold text-slate-900 mt-1">{{ $countDisetujui ?? 0 }}</h3>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl shadow-inner border border-emerald-100">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between relative overflow-hidden group hover:shadow-lg hover:border-rose-500/30 transition-all">
+                        <div class="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-emerald-600 to-amber-500 opacity-0 group-hover:opacity-100 transition-all"></div>
+                        <div>
+                            <p class="text-[11px] font-bold uppercase tracking-wider text-rose-600">Ditolak</p>
+                            <h3 class="text-2xl font-extrabold text-slate-900 mt-1">{{ $countDitolak ?? 0 }}</h3>
+                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-xl shadow-inner border border-rose-100">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sub-Pilihan Kategori (Mahasiswa / Umum) -->
+                <div class="mb-6 flex flex-wrap gap-2.5 items-center">
+                    <span class="text-xs font-bold text-slate-600 flex items-center gap-1.5"><i class="fa-solid fa-filter text-amber-600"></i> Kategori:</span>
+                    <a href="{{ route('simaksi.admin', ['status' => request('status', 'semua'), 'kategori' => 'semua']) }}" 
+                       class="px-3.5 py-1.5 rounded-full text-xs font-bold transition-all {{ (request('kategori', 'semua') == 'semua') ? 'bg-gradient-to-r from-emerald-900 to-teal-900 text-white shadow-md shadow-emerald-900/20' : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-100' }}">
+                        Semua Kategori
+                    </a>
+                    <a href="{{ route('simaksi.admin', ['status' => request('status', 'semua'), 'kategori' => 'mahasiswa']) }}" 
+                       class="px-3.5 py-1.5 rounded-full text-xs font-bold transition-all {{ (request('kategori') == 'mahasiswa') ? 'bg-gradient-to-r from-emerald-900 to-teal-900 text-white shadow-md shadow-emerald-900/20' : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-100' }}">
+                        Mahasiswa
+                    </a>
+                    <a href="{{ route('simaksi.admin', ['status' => request('status', 'semua'), 'kategori' => 'umum']) }}" 
+                       class="px-3.5 py-1.5 rounded-full text-xs font-bold transition-all {{ (request('kategori') == 'umum') ? 'bg-gradient-to-r from-emerald-900 to-teal-900 text-white shadow-md shadow-emerald-900/20' : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-100' }}">
+                        Umum
+                    </a>
+                </div>
+
+                <!-- Tabel Card Container -->
+                <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden mb-8">
+                    <div class="bg-gradient-to-r from-emerald-950 via-teal-950 to-emerald-900 text-white px-6 py-4 flex justify-between items-center text-sm font-bold border-b border-amber-500/30">
+                        <span class="flex items-center gap-2"><i class="fa-solid fa-list-check text-amber-400"></i> Daftar Permohonan SIPAKAR</span>
+                        <span class="text-xs font-semibold bg-emerald-900/60 text-amber-300 border border-emerald-700/50 px-3 py-1 rounded-full">Total Tampil: {{ $pendaftarans->count() }} Data</span>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse text-xs">
+                            <thead>
+                                <tr class="bg-slate-100/70 text-slate-700 uppercase tracking-wider text-[11px] border-b border-slate-200">
+                                    <th class="p-4 font-bold">No</th>
+                                    <th class="p-4 font-bold">Tanggal Daftar</th>
+                                    <th class="p-4 font-bold">Nama & Instansi</th>
+                                    <th class="p-4 font-bold">Kontak</th>
+                                    <th class="p-4 font-bold">Judul Kegiatan</th>
+                                    <th class="p-4 font-bold">Lokasi Kawasan</th>
+                                    <th class="p-4 font-bold">Status</th>
+                                    <th class="p-4 font-bold">Berkas</th>
+                                    <th class="p-4 font-bold text-center">Aksi & Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                @forelse($pendaftarans as $index => $item)
+                                    <tr class="hover:bg-emerald-50/35 transition-colors">
+                                        <td class="p-4 font-bold text-slate-700">{{ $index + 1 }}</td>
+                                        <td class="p-4 text-slate-600 whitespace-nowrap">{{ $item->created_at->format('d-m-Y H:i') }}</td>
+                                        <td class="p-4">
+                                            <span class="font-bold text-slate-900">{{ $item->nama_lengkap }}</span><br>
+                                            <small class="text-slate-500">NIK: {{ $item->nik_nip }}</small><br>
+                                            <small class="text-emerald-800 font-semibold">{{ $item->asal_instansi }}</small>
+
+                                            {{-- Tambahan Tampilan Khusus Mahasiswa --}}
+                                            @if(strtolower($item->kategori_pemohon) == 'mahasiswa')
+                                                <div class="mt-1.5 pt-1.5 border-t border-dashed border-slate-200 text-[11px]">
+                                                    <span class="bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded font-bold border border-amber-200">Mahasiswa</span><br>
+                                                    <span><b>NIM:</b> {{ $item->nim }}</span><br>
+                                                    <span><b>Prodi:</b> {{ $item->prodi }}</span><br>
+                                                    <span><b>Fakultas:</b> {{ $item->fakultas }}</span>
+                                                </div>
+                                            @else
+                                                <div class="mt-1">
+                                                    <span class="bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-bold text-[10px]">Umum</span>
+                                                </div>
+                                            @endif
+                                        </td>
+                                        <td class="p-4 whitespace-nowrap">
+                                            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $item->no_hp) }}" target="_blank" class="text-emerald-700 font-semibold hover:underline inline-flex items-center gap-1">
+                                                <i class="fa-brands fa-whatsapp text-emerald-600"></i> {{ $item->no_hp }}
+                                            </a>
+                                        </td>
+                                        <td class="p-4 max-w-[200px] font-medium text-slate-800">
+                                            {{ $item->judul_penelitian }}
+                                        </td>
+                                        <td class="p-4 whitespace-nowrap">
+                                            <span class="bg-emerald-50 text-emerald-900 px-2.5 py-1 rounded-md text-xs font-semibold border border-emerald-200/60">{{ $item->lokasi_penelitian }}</span>
+                                        </td>
+                                        <td class="p-4 whitespace-nowrap">
+                                            @if($item->status == 'disetujui')
+                                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-300 shadow-sm"><i class="fa-solid fa-circle-check text-emerald-600"></i> Disetujui</span>
+                                            @elseif($item->status == 'menunggu_zoom')
+                                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-sky-50 text-sky-800 border border-sky-300 shadow-sm"><i class="fa-solid fa-video text-sky-600"></i> Menunggu Zoom</span>
+                                            @elseif($item->status == 'ditolak')
+                                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-rose-50 text-rose-800 border border-rose-300 shadow-sm"><i class="fa-solid fa-circle-xmark text-rose-600"></i> Ditolak</span>
+                                            @else
+                                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-amber-50 text-amber-900 border border-amber-300 shadow-sm"><i class="fa-solid fa-clock text-amber-600"></i> Menunggu</span>
+                                            @endif
+                                        </td>
+                                        <td class="p-4 whitespace-nowrap space-y-1">
+                                            @if($item->file_ktp)
+                                                <a href="{{ asset('storage/' . $item->file_ktp) }}" target="_blank" class="inline-flex items-center gap-1 px-2.5 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[11px] font-semibold shadow-sm transition-all"><i class="fa-solid fa-id-card"></i> KTP</a><br>
+                                            @endif
+                                            @if($item->file_surat_pengantar)
+                                                <a href="{{ asset('storage/' . $item->file_surat_pengantar) }}" target="_blank" class="inline-flex items-center gap-1 px-2.5 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[11px] font-semibold shadow-sm transition-all"><i class="fa-solid fa-envelope"></i> Surat</a><br>
+                                            @endif
+                                            @if($item->file_proposal)
+                                                <a href="{{ asset('storage/' . $item->file_proposal) }}" target="_blank" class="inline-flex items-center gap-1 px-2.5 py-1 bg-rose-600 hover:bg-rose-700 text-white rounded text-[11px] font-semibold shadow-sm transition-all"><i class="fa-solid fa-file-pdf"></i> Proposal</a>
+                                            @endif
+                                        </td>
+                                        <td class="p-4 text-center align-middle">
+                                            <div class="flex flex-col gap-1.5 justify-center w-40 mx-auto">
                                                 
-                                                <label style="font-size: 10px; font-weight: bold; color: #10b981; display:block;">Upload Surat Izin (PDF):</label>
-                                                <input type="file" name="surat_izin" class="form-control-sm" accept=".pdf" required>
-                                                
-                                                <textarea name="catatan_admin" class="form-control-sm" placeholder="Catatan/SOP final (opsional)" rows="2">{{ $item->catatan_admin }}</textarea>
-
-                                                <button type="submit" class="btn-action btn-approve" style="width: 100%; font-size: 10px;" onclick="return confirm('Setujui permohonan ini dan unggah surat izin?')" title="Setujui Permohonan">
-                                                    <i class="fa-solid fa-check"></i> Setujui & Kirim Surat
+                                                <!-- Tombol Lihat Detail Lengkap -->
+                                                <button type="button" class="w-full bg-slate-700 hover:bg-slate-800 text-white py-1.5 px-3 rounded text-[11px] font-bold inline-flex items-center justify-center gap-1.5 shadow transition-all" onclick="openModal('modal-{{ $item->id }}')" title="Lihat Formulir Lengkap">
+                                                    <i class="fa-solid fa-eye"></i> Detail Lengkap
                                                 </button>
-                                            </form>
-                                        @endif
 
-                                        <!-- 3. Tombol Tolak -->
-                                        @if($item->status != 'ditolak')
-                                            <form action="{{ route('admin.simaksi.updateStatus', $item->id) }}" method="POST" style="margin:0; display:inline-block;">
-                                                @csrf @method('PATCH')
-                                                <input type="hidden" name="status" value="ditolak">
-                                                <button type="submit" class="btn-action btn-reject" onclick="return confirm('Tolak permohonan ini?')" title="Tolak">
-                                                    <i class="fa-solid fa-xmark"></i> Tolak
-                                                </button>
-                                            </form>
-                                          @endif
+                                                <!-- 1. Form Jadwal Zoom -->
+                                                <form action="{{ route('admin.simaksi.updateStatus', $item->id) }}" method="POST" class="border border-dashed border-sky-400 p-2 rounded bg-sky-50/70 text-left w-full m-0 space-y-1.5">
+                                                    @csrf 
+                                                    @method('PATCH')
+                                                    <input type="hidden" name="status" value="menunggu_zoom">
+                                                    <label class="text-[10px] font-bold text-sky-800 block">Jadwalkan Zoom:</label>
+                                                    <input type="datetime-local" name="tanggal_zoom" class="w-full p-1.5 text-[11px] border border-slate-300 rounded bg-white outline-none focus:border-sky-600" value="{{ $item->tanggal_zoom ? \Carbon\Carbon::parse($item->tanggal_zoom)->format('Y-m-d\TH:i') : '' }}" required>
+                                                    <input type="text" name="link_zoom" class="w-full p-1.5 text-[11px] border border-slate-300 rounded bg-white outline-none focus:border-sky-600" placeholder="Link Zoom / Meeting" value="{{ $item->link_zoom }}" required>
+                                                    <button type="submit" class="w-full bg-cyan-600 hover:bg-cyan-700 text-white py-1 px-2 rounded text-[10px] font-bold inline-flex items-center justify-center gap-1 shadow-sm transition-all" title="Kirim Jadwal Zoom ke Pemohon">
+                                                        <i class="fa-solid fa-video"></i> Kirim Zoom
+                                                    </button>
+                                                </form>
 
-                                        <!-- 4. Tombol Hapus Data -->
-                                        <form action="{{ route('admin.simaksi.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Hapus permanen permohonan {{ $item->nama_lengkap }}?');" style="margin: 0; display:inline-block;">
-                                            @csrf @method('DELETE')
-                                            <button type="submit" class="btn-action btn-delete" title="Hapus Data">
-                                                <i class="fa-solid fa-trash"></i> Hapus
-                                            </button>
-                                        </form>
+                                                <!-- 2. Form Setuju -->
+                                                @if($item->status != 'disetujui')
+                                                    <form action="{{ route('admin.simaksi.updateStatus', $item->id) }}" method="POST" enctype="multipart/form-data" class="border border-dashed border-emerald-500 p-2 rounded bg-emerald-50/70 text-left w-full m-0 space-y-1.5">
+                                                        @csrf 
+                                                        @method('PATCH')
+                                                        <input type="hidden" name="status" value="disetujui">
+                                                        
+                                                        <label class="text-[10px] font-bold text-emerald-800 block">Upload Surat Izin (PDF):</label>
+                                                        <input type="file" name="surat_izin" class="w-full p-1 text-[10px] border border-slate-300 rounded bg-white" accept=".pdf" required>
+                                                        
+                                                        <textarea name="catatan_admin" class="w-full p-1.5 text-[11px] border border-slate-300 rounded bg-white outline-none focus:border-emerald-600" placeholder="Catatan/SOP final (opsional)" rows="2">{{ $item->catatan_admin }}</textarea>
 
-                                    </div>
-                                </td>
-                            </tr>
+                                                        <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white py-1.5 px-2 rounded text-[10px] font-bold inline-flex items-center justify-center gap-1 shadow-sm transition-all" onclick="return confirm('Setujui permohonan ini dan unggah surat izin?')" title="Setujui Permohonan">
+                                                            <i class="fa-solid fa-check"></i> Setujui & Kirim
+                                                        </button>
+                                                    </form>
+                                                @endif
 
-                            <!-- Popup Modal Detail Formulir Pemohon -->
-                            <div id="modal-{{ $item->id }}" class="modal">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h3><i class="fa-solid fa-file-lines"></i> Detail Formulir SIMAKSI - {{ $item->nama_lengkap }}</h3>
-                                        <button onclick="closeModal('modal-{{ $item->id }}')" style="background:none; border:none; color:white; font-size:18px; cursor:pointer;">&times;</button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="detail-group">
-                                            <label>Nama Lengkap & NIK / NIP</label>
-                                            <p>{{ $item->nama_lengkap }} ({{ $item->nik_nip }})</p>
-                                        </div>
-                                        <div class="detail-group">
-                                            <label>Tempat, Tanggal Lahir</label>
-                                            <p>{{ $item->tempat_lahir }}, {{ \Carbon\Carbon::parse($item->tanggal_lahir)->format('d F Y') }}</p>
-                                        </div>
-                                        <div class="detail-group">
-                                            <label>Alamat Pemohon</label>
-                                            <p>{{ $item->alamat }}</p>
-                                        </div>
-                                        <div class="detail-group">
-                                            <label>Asal Instansi / Universitas</label>
-                                            <p>{{ $item->asal_instansi }}</p>
-                                        </div>
-                                        <div class="detail-group">
-                                            <label>Nomor WhatsApp / HP</label>
-                                            <p>{{ $item->no_hp }}</p>
-                                        </div>
-                                        <div class="detail-group">
-                                            <label>Judul Penelitian / Kegiatan</label>
-                                            <p>{{ $item->judul_penelitian }}</p>
-                                        </div>
-                                        <div class="detail-group">
-                                            <label>Tujuan Kegiatan</label>
-                                            <p>{{ $item->tujuan_kegiatan }}</p>
-                                        </div>
-                                        <div class="detail-group">
-                                            <label>Lokasi Kawasan Konservasi</label>
-                                            <p><span class="badge-location">{{ $item->lokasi_penelitian }}</span></p>
-                                        </div>
-                                        <div class="detail-group">
-                                            <label>Tanggal Pelaksanaan Kegiatan</label>
-                                            <p>{{ \Carbon\Carbon::parse($item->tanggal_mulai)->format('d F Y') }} s/d {{ \Carbon\Carbon::parse($item->tanggal_selesai)->format('d F Y') }}</p>
-                                        </div>
-                                        <div class="detail-group">
-                                            <label>Status Persetujuan</label>
-                                            <p>
-                                                @if($item->status == 'disetujui')
-                                                    <span class="badge-status badge-disetujui"><i class="fa-solid fa-circle-check"></i> Disetujui</span>
-                                                @elseif($item->status == 'menunggu_zoom')
-                                                    <span class="badge-status badge-menunggu_zoom"><i class="fa-solid fa-video"></i> Menunggu Zoom</span>
-                                                @elseif($item->status == 'ditolak')
-                                                    <span class="badge-status badge-ditolak"><i class="fa-solid fa-circle-xmark"></i> Ditolak</span>
+                                                <div class="flex gap-1 w-full">
+                                                    <!-- 3. Tombol Tolak -->
+                                                    @if($item->status != 'ditolak')
+                                                        <form action="{{ route('admin.simaksi.updateStatus', $item->id) }}" method="POST" class="m-0 flex-1">
+                                                            @csrf @method('PATCH')
+                                                            <input type="hidden" name="status" value="ditolak">
+                                                            <button type="submit" class="w-full bg-amber-600 hover:bg-amber-700 text-white py-1.5 px-2 rounded text-[10px] font-bold inline-flex items-center justify-center gap-1 shadow-sm transition-all" onclick="return confirm('Tolak permohonan ini?')" title="Tolak">
+                                                                <i class="fa-solid fa-xmark"></i> Tolak
+                                                            </button>
+                                                        </form>
+                                                    @endif
+
+                                                    <!-- 4. Tombol Hapus Data -->
+                                                    <form action="{{ route('admin.simaksi.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Hapus permanen permohonan {{ $item->nama_lengkap }}?');" class="m-0 flex-1">
+                                                        @csrf @method('DELETE')
+                                                        <button type="submit" class="w-full bg-rose-600 hover:bg-rose-700 text-white py-1.5 px-2 rounded text-[10px] font-bold inline-flex items-center justify-center gap-1 shadow-sm transition-all" title="Hapus Data">
+                                                            <i class="fa-solid fa-trash"></i> Hapus
+                                                        </button>
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Popup Modal Detail Formulir Pemohon -->
+                                    <div id="modal-{{ $item->id }}" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
+                                        <div class="bg-white w-full max-w-xl max-h-[90vh] rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-slate-200 animate-in fade-in zoom-in duration-200">
+                                            <div class="bg-gradient-to-r from-emerald-950 to-emerald-900 text-white px-6 py-4 flex justify-between items-center font-bold border-b border-amber-500/30">
+                                                <h3 class="text-sm flex items-center gap-2"><i class="fa-solid fa-file-lines text-amber-400"></i> Detail Formulir SIMAKSI - {{ $item->nama_lengkap }}</h3>
+                                                <button onclick="closeModal('modal-{{ $item->id }}')" class="text-white hover:text-amber-400 text-xl font-bold focus:outline-none">&times;</button>
+                                            </div>
+                                            <div class="p-6 overflow-y-auto space-y-4 text-xs">
+                                                <div class="border-b border-slate-100 pb-3">
+                                                    <label class="font-bold text-slate-400 uppercase tracking-wider text-[10px] block mb-1">Nama Lengkap & NIK / NIP</label>
+                                                    <p class="font-semibold text-slate-800 text-sm">{{ $item->nama_lengkap }} ({{ $item->nik_nip }})</p>
+                                                </div>
+
+                                                {{-- Tambahan Info Akademik di Modal --}}
+                                                @if(strtolower($item->kategori_pemohon) == 'mahasiswa')
+                                                    <div class="border-b border-slate-100 pb-3">
+                                                        <label class="font-bold text-slate-400 uppercase tracking-wider text-[10px] block mb-1">Kategori & Data Akademik</label>
+                                                        <p class="font-medium text-slate-800">
+                                                            <span class="text-amber-700 font-bold">Mahasiswa</span><br>
+                                                            <b>NIM:</b> {{ $item->nim }}<br>
+                                                            <b>Program Studi:</b> {{ $item->prodi }}<br>
+                                                            <b>Fakultas:</b> {{ $item->fakultas }}
+                                                        </p>
+                                                    </div>
                                                 @else
-                                                    <span class="badge-status badge-pending"><i class="fa-solid fa-clock"></i> Menunggu Persetujuan</span>
-                                              @endif
-                                        </p>
+                                                    <div class="border-b border-slate-100 pb-3">
+                                                        <label class="font-bold text-slate-400 uppercase tracking-wider text-[10px] block mb-1">Kategori Pemohon</label>
+                                                        <p class="font-medium text-slate-800"><span class="text-slate-600 font-bold">Umum</span></p>
+                                                    </div>
+                                                @endif
+
+                                                <div class="border-b border-slate-100 pb-3">
+                                                    <label class="font-bold text-slate-400 uppercase tracking-wider text-[10px] block mb-1">Tempat, Tanggal Lahir</label>
+                                                    <p class="font-semibold text-slate-800">{{ $item->tempat_lahir }}, {{ \Carbon\Carbon::parse($item->tanggal_lahir)->format('d F Y') }}</p>
+                                                </div>
+                                                <div class="border-b border-slate-100 pb-3">
+                                                    <label class="font-bold text-slate-400 uppercase tracking-wider text-[10px] block mb-1">Alamat Pemohon</label>
+                                                    <p class="font-semibold text-slate-800">{{ $item->alamat }}</p>
+                                                </div>
+                                                <div class="border-b border-slate-100 pb-3">
+                                                    <label class="font-bold text-slate-400 uppercase tracking-wider text-[10px] block mb-1">Asal Instansi / Universitas</label>
+                                                    <p class="font-semibold text-slate-800">{{ $item->asal_instansi }}</p>
+                                                </div>
+                                                <div class="border-b border-slate-100 pb-3">
+                                                    <label class="font-bold text-slate-400 uppercase tracking-wider text-[10px] block mb-1">Nomor WhatsApp / HP</label>
+                                                    <p class="font-semibold text-slate-800">{{ $item->no_hp }}</p>
+                                                </div>
+                                                <div class="border-b border-slate-100 pb-3">
+                                                    <label class="font-bold text-slate-400 uppercase tracking-wider text-[10px] block mb-1">Judul Penelitian / Kegiatan</label>
+                                                    <p class="font-semibold text-slate-800">{{ $item->judul_penelitian }}</p>
+                                                </div>
+                                                <div class="border-b border-slate-100 pb-3">
+                                                    <label class="font-bold text-slate-400 uppercase tracking-wider text-[10px] block mb-1">Tujuan Kegiatan</label>
+                                                    <p class="font-semibold text-slate-800">{{ $item->tujuan_kegiatan }}</p>
+                                                </div>
+                                                <div class="border-b border-slate-100 pb-3">
+                                                    <label class="font-bold text-slate-400 uppercase tracking-wider text-[10px] block mb-1">Lokasi Kawasan Konservasi</label>
+                                                    <p><span class="bg-emerald-50 text-emerald-900 px-2.5 py-1 rounded-md font-semibold border border-emerald-200">{{ $item->lokasi_penelitian }}</span></p>
+                                                </div>
+                                                <div class="border-b border-slate-100 pb-3">
+                                                    <label class="font-bold text-slate-400 uppercase tracking-wider text-[10px] block mb-1">Tanggal Pelaksanaan Kegiatan</label>
+                                                    <p class="font-semibold text-slate-800">{{ \Carbon\Carbon::parse($item->tanggal_mulai)->format('d F Y') }} s/d {{ \Carbon\Carbon::parse($item->tanggal_selesai)->format('d F Y') }}</p>
+                                                </div>
+                                                <div>
+                                                    <label class="font-bold text-slate-400 uppercase tracking-wider text-[10px] block mb-1">Status Persetujuan</label>
+                                                    <p>
+                                                        @if($item->status == 'disetujui')
+                                                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200"><i class="fa-solid fa-circle-check text-emerald-600"></i> Disetujui</span>
+                                                        @elseif($item->status == 'menunggu_zoom')
+                                                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-sky-50 text-sky-800 border border-sky-200"><i class="fa-solid fa-video text-sky-600"></i> Menunggu Zoom</span>
+                                                        @elseif($item->status == 'ditolak')
+                                                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-rose-50 text-rose-800 border border-rose-200"><i class="fa-solid fa-circle-xmark text-rose-600"></i> Ditolak</span>
+                                                        @else
+                                                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-amber-50 text-amber-900 border border-amber-200"><i class="fa-solid fa-clock text-amber-600"></i> Menunggu Persetujuan</span>
+                                                        @endif
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+
+                                @empty
+                                    <tr>
+                                        <td colspan="9" class="text-center py-12 text-slate-400">
+                                            <i class="fa-solid fa-folder-open text-4xl mb-3 text-emerald-300 block"></i>
+                                            <p class="text-xs font-medium">Tidak ada permohonan yang sesuai dengan kategori ini.</p>
+                                        </td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Card Form Export Laporan Modern -->
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden mb-8 transition-all hover:shadow-md">
+                    <div class="bg-gradient-to-r from-emerald-950 to-teal-950 text-white px-6 py-5 flex items-center gap-3 border-b border-amber-500/30">
+                        <i class="fa-solid fa-file-excel text-amber-400 text-xl"></i>
+                        <div>
+                            <h3 class="text-sm font-bold tracking-wide">Export Laporan Data SIMAKSI (BKSDA)</h3>
+                            <p class="text-[11px] text-slate-300 font-normal mt-0.5">Pilih kategori dan rentang periode untuk melihat rekapitulasi data resmi</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <form action="{{ route('admin.export.data') }}" method="GET" target="_blank">
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+                                <!-- Kategori Permohonan -->
+                                <div class="flex flex-col gap-1.5">
+                                    <label class="text-[11px] font-bold text-slate-600 uppercase tracking-wider">Kategori Permohonan</label>
+                                    <select name="kategori" class="w-full p-2.5 text-xs font-medium text-slate-800 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:bg-white focus:border-emerald-700 focus:ring-2 focus:ring-emerald-700/10 transition-all" required>
+                                        <option value="semua">Semua Kategori</option>
+                                        <option value="mahasiswa">Mahasiswa</option>
+                                        <option value="umum">Umum</option>
+                                    </select>
+                                </div>
+
+                                <!-- Periode Mulai -->
+                                <div class="flex flex-col gap-1.5">
+                                    <label class="text-[11px] font-bold text-slate-600 uppercase tracking-wider">Dari (Bulan/Tahun)</label>
+                                    <input type="month" name="periode_mulai" class="w-full p-2.5 text-xs font-medium text-slate-800 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:bg-white focus:border-emerald-700 focus:ring-2 focus:ring-emerald-700/10 transition-all" required>
+                                </div>
+
+                                <!-- Periode Selesai -->
+                                <div class="flex flex-col gap-1.5">
+                                    <label class="text-[11px] font-bold text-slate-600 uppercase tracking-wider">Sampai (Bulan/Tahun)</label>
+                                    <input type="month" name="periode_selesai" class="w-full p-2.5 text-xs font-medium text-slate-800 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:bg-white focus:border-emerald-700 focus:ring-2 focus:ring-emerald-700/10 transition-all" required>
+                                </div>
+
+                                <!-- Tombol Lihat / Preview Data -->
+                                <div>
+                                    <button type="submit" class="w-full bg-gradient-to-r from-emerald-700 to-teal-700 hover:from-emerald-800 hover:to-teal-800 text-white py-2.5 px-4 rounded-lg text-xs font-bold inline-flex items-center justify-center gap-2 shadow-md shadow-emerald-700/20 transition-all h-[42px]">
+                                        <i class="fa-solid fa-eye"></i> Lihat & Unduh Laporan
+                                    </button>
                                 </div>
                             </div>
-                        </div>
+                        </form>
+                    </div>
+                </div>
 
-                    @empty
-                        <tr>
-                            <td colspan="9" class="empty-state">
-                                <i class="fa-solid fa-folder-open" style="font-size: 32px; margin-bottom: 10px; color: #cbd5e1;"></i>
-                                <p>Tidak ada permohonan yang sesuai dengan kategori ini.</p>
-                            </td>
-                        </tr>
-                    @endforelse
-                  </tbody>
-            </table>
+            </main>
         </div>
     </div>
 
+    <!-- JavaScript untuk Modal & Mobile Sidebar Toggle -->
     <script>
         function openModal(id) {
-            document.getElementById(id).classList.add('active');
+            const modal = document.getElementById(id);
+            if(modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
         }
         function closeModal(id) {
-            document.getElementById(id).classList.remove('active');
+            const modal = document.getElementById(id);
+            if(modal) {
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+            }
+        }
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            if(sidebar && overlay) {
+                sidebar.classList.toggle('-translate-x-full');
+                overlay.classList.toggle('hidden');
+            }
         }
     </script>
 </body>

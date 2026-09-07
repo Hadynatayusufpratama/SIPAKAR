@@ -11,27 +11,31 @@ class PendaftaranSimaksi extends Model
 
     protected $table = 'pendaftaran_simaksi'; // Sesuaikan dengan nama tabel hasil migrate
 
-    protected $fillable = [
-        'user_id',
-        'nama_lengkap',
-        'nik_nip',
-        'alamat',
-        'tempat_lahir',
-        'tanggal_lahir',
-        'no_hp',
-        'asal_instansi',
-        'judul_penelitian',
-        'tujuan_kegiatan',
-        'tanggal_mulai',
-        'tanggal_selesai',
-        'lokasi_penelitian',
-        'file_ktp',
-        'file_surat_pengantar',
-        'file_proposal',
-        'status',
-        'tanggal_zoom',     // Tambahan baru
-        'link_zoom',        // Tambahan baru
-        'surat_izin',       // Tambahan baru
-        'catatan_admin',    // Tambahan baru
-    ];
+protected $fillable = [
+    'user_id',
+    'kategori_pemohon',   // <-- WAJIB DITAMBAHKAN
+    'nim',                // <-- WAJIB DITAMBAHKAN
+    'prodi',              // <-- WAJIB DITAMBAHKAN
+    'fakultas',           // <-- WAJIB DITAMBAHKAN
+    'nama_lengkap',
+    'nik_nip',
+    'alamat',
+    'tempat_lahir',
+    'tanggal_lahir',
+    'no_hp',
+    'asal_instansi',
+    'judul_penelitian',
+    'tujuan_kegiatan',
+    'tanggal_mulai',
+    'tanggal_selesai',
+    'lokasi_penelitian',
+    'file_ktp',
+    'file_surat_pengantar',
+    'file_proposal',
+    'status',
+    'tanggal_zoom',    
+    'link_zoom',        
+    'surat_izin',       
+    'catatan_admin',    
+];
 }
