@@ -405,7 +405,7 @@
                                         <th class="p-4 font-bold">Lokasi Kawasan</th>
                                         <th class="p-4 font-bold">Tanggal</th>
                                         <th class="p-4 font-bold">Status</th>
-                                        <th class="p-4 font-bold">Jadwal & Zoom</th>
+                                        <th class="p-4 font-bold">catatan admin jadwal & link zoom</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-slate-100">
