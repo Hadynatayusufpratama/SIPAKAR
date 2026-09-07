@@ -300,28 +300,42 @@
                                     <div class="flex flex-col gap-2 col-span-2">
                                         <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">Lokasi Kawasan Konservasi BKSDA Sulteng <span class="text-red-500">*</span></label>
                                         <div class="relative">
-                                            <select name="lokasi_penelitian" class="w-full px-4 py-3.5 bg-slate-50 border border-slate-300 rounded-2xl text-sm font-semibold outline-none focus:ring-2 focus:ring-emerald-700 focus:bg-white transition-all appearance-none cursor-pointer" required>
-                                                <option value="" disabled selected>-- Pilih Kawasan Konservasi --</option>
-                                                <optgroup label="Taman Wisata Alam (TWA)">
-                                                    <option value="TWA Wera">TWA Wera</option>
-                                                    <option value="TWA Bancea">TWA Bancea</option>
-                                                    <option value="TWA Pulau Toko Bae">TWA Pulau Toko Bae</option>
-                                                </optgroup>
-                                                <optgroup label="Taman Buru (TB)">
-                                                    <option value="Taman Buru Landusa Tomata">Taman Buru Landusa Tomata</option>
-                                                </optgroup>
-                                                <optgroup label="Cagar Alam (CA)">
-                                                    <option value="Cagar Alam Pangi Binangga">Cagar Alam Pangi Binangga</option>
-                                                    <option value="Cagar Alam Gunung Sojol">Cagar Alam Gunung Sojol</option>
-                                                    <option value="Cagar Alam Gunung Tinombala">Cagar Alam Gunung Tinombala</option>
-                                                    <option value="Cagar Alam Gunung Dako">Cagar Alam Gunung Dako</option>
-                                                    <option value="Cagar Alam Morowali">Cagar Alam Morowali</option>
-                                                </optgroup>
-                                                <optgroup label="Suaka Margasatwa (SM)">
-                                                    <option value="Suaka Margasatwa Pulau Dolangan">Suaka Margasatwa Pulau Dolangan</option>
-                                                    <option value="Suaka Margasatwa Bakiriang">Suaka Margasatwa Bakiriang</option>
-                                                </optgroup>
-                                            </select>
+                                            <select name="kawasan" class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-semibold text-slate-900 outline-none focus:ring-2 focus:ring-emerald-600 focus:bg-white transition-all shadow-inner" required>
+    <option value="" disabled selected>-- Pilih Kawasan Konservasi --</option>
+    
+    <!-- Taman Wisata Alam (TWA) -->
+    <optgroup label="Taman Wisata Alam (TWA)">
+        <option value="TWA Wera">TWA Wera</option>
+        <option value="TWA Bancea">TWA Bancea</option>
+        <option value="TWA Pulau Toko Bae">TWA Pulau Toko Bae</option>
+    </optgroup>
+
+    <!-- Taman Buru (TB) -->
+    <optgroup label="Taman Buru (TB)">
+        <option value="Taman Buru Landusa Tomata">Taman Buru Landusa Tomata</option>
+    </optgroup>
+
+    <!-- Cagar Alam (CA) -->
+    <optgroup label="Cagar Alam (CA)">
+        <option value="Cagar Alam Pangi Binangga">Cagar Alam Pangi Binangga</option>
+        <option value="Cagar Alam Gunung Sojol">Cagar Alam Gunung Sojol</option>
+        <option value="Cagar Alam Gunung Tinombala">Cagar Alam Gunung Tinombala</option>
+        <option value="Cagar Alam Gunung Dako">Cagar Alam Gunung Dako</option>
+        <option value="Cagar Alam Pamona">Cagar Alam Pamona</option>
+        <option value="Cagar Alam Tanjung Api">Cagar Alam Tanjung Api</option>
+        <option value="Cagar Alam Pati-Pati">Cagar Alam Pati-Pati</option>
+        <option value="Cagar Alam Morowali">Cagar Alam Morowali</option>
+    </optgroup>
+
+    <!-- Suaka Margasatwa (SM) -->
+    <optgroup label="Suaka Margasatwa (SM)">
+        <option value="Suaka Margasatwa Pulau Dolangan">Suaka Margasatwa Pulau Dolangan</option>
+        <option value="Suaka Margasatwa Pulau Pasoso">Suaka Margasatwa Pulau Pasoso</option>
+        <option value="Suaka Margasatwa Pinjan Matop">Suaka Margasatwa Pinjan Matop</option>
+        <option value="Suaka Margasatwa Lombuyan">Suaka Margasatwa Lombuyan</option>
+        <option value="Suaka Margasatwa Bakiriang">Suaka Margasatwa Bakiriang</option>
+    </optgroup>
+</select>
                                             <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500">
                                                 <i class="fa-solid fa-chevron-down text-xs"></i>
                                             </div>
