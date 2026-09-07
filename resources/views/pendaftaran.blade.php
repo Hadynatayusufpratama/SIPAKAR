@@ -3,7 +3,8 @@
 <head>
     <script src="https://cdn.tailwindcss.com"></script>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Diubah dari width=device-width menjadi width=1200px agar tampilan di HP tetap memaksa format desktop -->
+    <meta name="viewport" content="width=1200, initial-scale=1.0">
     <title>SIPAKAR - Balai KSDA Sulawesi Tengah</title>
     <!-- FontAwesome & Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
