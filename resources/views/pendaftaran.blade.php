@@ -38,19 +38,19 @@
                         
                         <button class="nav-tab-btn active w-full flex items-center gap-3 px-4 py-3.5 rounded-2xl text-xs font-bold bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg shadow-emerald-900/40 transition-all cursor-pointer border border-emerald-400/30" id="btn-tab-form" onclick="toggleTab('form')">
                             <div class="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center text-amber-300 shadow-inner"><i class="fa-solid fa-file-pen"></i></div>
-                            <span class="text-left flex-1">Form Pengajuan Baru</span>
+                            <span class="text-left flex-1 text-amber-300">Form Pengajuan Baru</span>
                             <i class="fa-solid fa-chevron-right text-[10px] text-emerald-200"></i>
                         </button>
 
                         <button class="nav-tab-btn w-full flex items-center gap-3 px-4 py-3.5 rounded-2xl text-xs font-semibold text-emerald-200 hover:bg-white/10 hover:text-white transition-all cursor-pointer border border-transparent" id="btn-tab-status" onclick="toggleTab('status')">
-                            <div class="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center text-teal-300"><i class="fa-solid fa-list-check"></i></div>
-                            <span class="text-left flex-1">Status & Permohonan</span>
+                            <div class="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center text-amber-300"><i class="fa-solid fa-list-check"></i></div>
+                            <span class="text-left flex-1 text-amber-300">Status & Permohonan</span>
                             <span class="bg-gradient-to-r from-amber-400 to-amber-500 text-emerald-950 font-black px-2 py-0.5 rounded-full text-[10px] shadow-sm">{{ $totalPermohonan ?? 0 }}</span>
                         </button>
 
                         <button class="nav-tab-btn w-full flex items-center gap-3 px-4 py-3.5 rounded-2xl text-xs font-semibold text-emerald-200 hover:bg-white/10 hover:text-white transition-all cursor-pointer border border-transparent" id="btn-tab-profile" onclick="toggleTab('profile')">
-                            <div class="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center text-emerald-300"><i class="fa-solid fa-user-gear"></i></div>
-                            <span class="text-left flex-1">Profil Saya</span>
+                            <div class="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center text-amber-300"><i class="fa-solid fa-user-gear"></i></div>
+                            <span class="text-left flex-1 text-amber-300">Profil Saya</span>
                         </button>
                     </div>
                 </div>
