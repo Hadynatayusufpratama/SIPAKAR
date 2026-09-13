@@ -24,14 +24,13 @@
                     <!-- Brand Header -->
                     <div class="p-6 border-b border-emerald-700/30 bg-emerald-900/40 backdrop-blur-md flex flex-col items-center text-center">
                         <div class="bg-gradient-to-tr from-white to-emerald-50 p-3.5 rounded-2xl shadow-xl border border-emerald-200/20 mb-3 transform hover:scale-105 transition-transform duration-300">
-                            <img src="{{ asset('images/logo_bksda.png') }}" alt="Logo BKSDA" class="h-14 w-auto object-contain">
+                            <img src="{{ asset('images/logo_bksda.png') }}" alt="Logo BKSDA" class="h-14 w-auto max-w-full object-contain block mx-auto">
                         </div>
                         <div>
                             <h2 class="font-black text-xs tracking-wider text-white leading-tight">BKSDA SULAWESI TENGAH</h2>
                             <span class="text-[10px] bg-gradient-to-r from-amber-400 to-orange-400 text-emerald-950 font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-widest mt-1.5 inline-block shadow-sm">SIPAKAR System</span>
                         </div>
                     </div>
-
                     <!-- Menu Navigasi Samping (Tab Trigger) -->
                     <div class="p-4 space-y-2.5 mt-3">
                         <p class="px-3 text-[10px] font-extrabold text-emerald-400 uppercase tracking-widest mb-1">Navigasi Utama</p>
