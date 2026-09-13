@@ -116,7 +116,7 @@ class SimaksiController extends Controller
             'tujuan_kegiatan'      => 'required|string',
             'tanggal_mulai'        => 'required|date',
             'tanggal_selesai'      => 'required|date',
-            'lokasi_penelitian'    => 'required|string|max:255',
+            'kawasan'              => 'required|string|max:255',
             'file_ktp'             => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
             'file_surat_pengantar' => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
             'file_proposal'        => 'required|file|mimes:pdf|max:10240',
@@ -145,7 +145,7 @@ class SimaksiController extends Controller
     'tujuan_kegiatan'      => $request->tujuan_kegiatan,
     'tanggal_mulai'        => $request->tanggal_mulai,
     'tanggal_selesai'      => $request->tanggal_selesai,
-    'lokasi_penelitian'    => $request->lokasi_penelitian,
+    'lokasi_penelitian'    => $request->kawasan,
     'file_ktp'             => $pathKtp,
     'file_surat_pengantar' => $pathPengantar,
     'file_proposal'        => $pathProposal,
@@ -182,7 +182,7 @@ class SimaksiController extends Controller
             'tujuan_kegiatan'      => 'required|string',
             'tanggal_mulai'        => 'required|date',
             'tanggal_selesai'      => 'required|date',
-            'lokasi_penelitian'    => 'required|string|max:255',
+            'kawasan'              => 'required|string|max:255',
             'file_ktp'             => 'nullable|file|mimes:pdf|jpg,jpeg,png|max:5120',
             'file_surat_pengantar' => 'nullable|file|mimes:pdf|jpg,jpeg,png|max:5120',
             'file_proposal'        => 'nullable|file|mimes:pdf|max:10240',
@@ -229,7 +229,7 @@ class SimaksiController extends Controller
             'tujuan_kegiatan'      => $request->tujuan_kegiatan,
             'tanggal_mulai'        => $request->tanggal_mulai,
             'tanggal_selesai'      => $request->tanggal_selesai,
-            'lokasi_penelitian'    => $request->lokasi_penelitian,
+            'lokasi_penelitian'    => $request->kawasan,
         ]);
 
         return redirect()->route('simaksi.admin')->with('success', 'Data permohonan berhasil diperbarui!');
@@ -335,7 +335,7 @@ class SimaksiController extends Controller
         // Filter Rentang Waktu (Bulan & Tahun)
         if ($periodeMulai && $periodeSelesai) {
             $dateMulai = $periodeMulai . '-01 00:00:00';
-            $dateSelesai = date('Y-m-t 23:59:59', strtotime($periodeSelesai . '-01'));
+            $dateSelesai = date('Y-m-t 23:59:59', strtotime($periodeSselesai . '-01'));
             $query->whereBetween('created_at', [$dateMulai, $dateSelesai]);
         }
 
