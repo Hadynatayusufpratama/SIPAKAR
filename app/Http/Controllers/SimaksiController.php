@@ -335,7 +335,7 @@ class SimaksiController extends Controller
         // Filter Rentang Waktu (Bulan & Tahun)
         if ($periodeMulai && $periodeSelesai) {
             $dateMulai = $periodeMulai . '-01 00:00:00';
-            $dateSelesai = date('Y-m-t 23:59:59', strtotime($periodeSselesai . '-01'));
+            $dateSelesai = date('Y-m-t 23:59:59', strtotime($periodeSelesai . '-01'));
             $query->whereBetween('created_at', [$dateMulai, $dateSelesai]);
         }
 
